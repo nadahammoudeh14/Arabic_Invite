@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -119,9 +119,10 @@
     </style>
 </head>
 <body>
-
+    <h1> ! مرحباً</h1>
+    <p>قم بإستبدال الحرف الأوسط لتكوين ثلاث كلمات محتلفة</p>
     <div id="lettersContainer">
-        <p id="lettersDisplay">الكلمة: أ....د</p>
+        <p id="lettersDisplay">أ....د</p>
     </div>
 
     <form id="wordForm">
@@ -152,7 +153,7 @@
         let resultMessageElement = document.getElementById("resultMessage");
 
         // Display the available letters
-        lettersDisplayElement.textContent = "الكلمة : " + availableLetters.join("..... ");
+        lettersDisplayElement.textContent = " " + availableLetters.join("..... ");
 
         // Function to create and display balloons
         function createBalloons() {
