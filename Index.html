@@ -131,14 +131,15 @@
         }
 
     </style>
+    <div id="timerDisplay">الوقت المتبقي <span id="timerValue">30</span> ثانية</div>
 </head>
 <body>
-     <br />
-        <br />
-     <br />
-        <br />
-     <br />
-        <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <h1> ! مرحباً</h1>
     <h2>قم بإستبدال الحرف الأوسط لتكوين ثلاث كلمات مختلفة</h2>
     <div id="lettersContainer">
@@ -162,6 +163,7 @@
         <br /><br />
     </form>
     <p id="resultMessage"></p>
+    
     <script>
         const availableLetters = ["أ", "د"];
         let correctWords = ["أسد", "أمد", "أحد"]; // You can customize the correct words
@@ -171,6 +173,7 @@
         let inputField2 = document.getElementById("inputField2");
         let inputField3 = document.getElementById("inputField3");
         let resultMessageElement = document.getElementById("resultMessage");
+        let timerValueElement = document.getElementById("timerValue");
 
         // Display the available letters
         lettersDisplayElement.textContent = " " + availableLetters.join("..... ");
@@ -184,6 +187,35 @@
                 document.body.appendChild(balloon);
             }
         }
+        // Set the initial timer value to 20 seconds
+        let timer = 10;
+        let timerInterval;
+
+        // Create an Audio element with the MP3 alert sound
+        const alertSound = new Audio('https://drive.google.com/file/d/1L2F-2_8vzDKLul-eL2PDfhHwoCAjn3_R/view?usp=sharing');
+        function startTimer() {
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            if (timer > 0) {
+                timer--;
+                timerValueElement.textContent = timer; // Update the displayed timer value
+            } else {
+                clearInterval(timerInterval);
+                alert("لقد نفذ وقتك !"); // Trigger an alert when the timer reaches zero
+                playAlertSound(); // Play an alert sound when the timer reaches zero
+            }
+        }
+
+        function playAlertSound() {
+            // Play the alert sound
+            alertSound.play();
+        }
+
+        // Start the timer when the page loads
+        startTimer();
+
 
         // Function to check the input words
         function checkWords() {
