@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Creation Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        <style >
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f0f0f0;
+        }
+
+        #lettersContainer {
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        #wordForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 15px;
+            font-size: 18px;
+            background-color: #4caf50;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+        #resultMessage {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #ff6347; /* Tomato color */
+        }
+        /* Celebration animation keyframes */
+        @keyframes celebration {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.9);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Add the celebration effect class */
+        .celebrate {
+            animation: celebration 0.9s ease-in-out;
+        }
+
+        /* Add the celebration effect class */
+        .celebrate {
+            animation: celebration 0.5s ease-in-out;
+        }
+
+        /* Balloon animation keyframes */
+        @keyframes balloonAnimation {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(-150px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Balloon styles */
+        .balloon {
+            width: 20px;
+            height: 30px;
+            background-color: #ff69b4; /* HotPink color */
+            border-radius: 50%;
+            position: absolute;
+            animation: balloonAnimation 2s ease-in-out infinite;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="lettersContainer">
+        <p id="lettersDisplay">الكلمة: أ....د</p>
+    </div>
+
+    <form id="wordForm">
+        <label for="inputField1">الكلمة الأولى </label>
+        <input type="text" id="inputField1" required>
+        <br />
+        <br />
+        <label for="inputField2">الكلمة الثانية </label>
+        <input type="text" id="inputField2" required>
+        <br />
+        <br />
+        <label for="inputField3">الكلمة الثالثة </label>
+        <input type="text" id="inputField3" required>
+        <br />
+        <br />
+        <button type="button" onclick="checkWords()">Submit</button>
+        <br /><br />
+    </form>
+    <p id="resultMessage"></p>
+    <script>
+        const availableLetters = ["أ", "د"];
+        let correctWords = ["أسد", "أمد", "أحد"]; // You can customize the correct words
+
+        let lettersDisplayElement = document.getElementById("lettersDisplay");
+        let inputField1 = document.getElementById("inputField1");
+        let inputField2 = document.getElementById("inputField2");
+        let inputField3 = document.getElementById("inputField3");
+        let resultMessageElement = document.getElementById("resultMessage");
+
+        // Display the available letters
+        lettersDisplayElement.textContent = "الكلمة : " + availableLetters.join("..... ");
+
+        // Function to create and display balloons
+        function createBalloons() {
+            for (let i = 0; i < 5; i++) {
+                let balloon = document.createElement("div");
+                balloon.className = "balloon";
+                balloon.style.left = Math.random() * window.innerWidth + "px";
+                document.body.appendChild(balloon);
+            }
+        }
+
+        // Function to check the input words
+        function checkWords() {
+            let userInput1 = inputField1.value.toLowerCase();
+            let userInput2 = inputField2.value.toLowerCase();
+            let userInput3 = inputField3.value.toLowerCase();
+
+            if (correctWords.includes(userInput1) &&
+                correctWords.includes(userInput2) &&
+                correctWords.includes(userInput3)) {
+                resultMessageElement.textContent = "لقد فعلتها! كل الكلمات صحيحة";
+                resultMessageElement.classList.add("celebrate");
+                resultMessageElement.style.color = "#32CD32";
+                createBalloons(); // Display balloons
+            } else {
+                resultMessageElement.textContent = "خطأ! حاول مرة أخرى";
+                resultMessageElement.style.color = "#ff6347";
+            }
+        }
+    </script>
+
+</body>
+</html>
